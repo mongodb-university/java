@@ -4,10 +4,13 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
+import org.bson.BsonValue;
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Crud {
     private final MongoCollection<Document> collection;
@@ -17,6 +20,9 @@ public class Crud {
     }
 
     public void insertOneDocument(Document doc) {
-        //TODO implement insertOne code here
+        System.out.println("Inserting one account document");  
+        InsertOneResult result = collection.insertOne(doc);    
+        BsonValue id = result.getInsertedId();  
+        System.out.println("Inserted document Id: " + id);
     }
 }
