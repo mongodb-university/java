@@ -20,9 +20,6 @@ public class Crud {
     }
 
     public void insertOneDocument(Document doc) {
-        System.out.println("Inserting one account document");  
-        InsertOneResult result = collection.insertOne(doc);    
-        BsonValue id = result.getInsertedId();  
-        System.out.println("Inserted document Id: " + id);
+        //TODO implement insertOne code here
     }
 }
