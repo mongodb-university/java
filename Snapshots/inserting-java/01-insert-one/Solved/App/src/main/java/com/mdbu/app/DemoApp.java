@@ -38,7 +38,7 @@ public class DemoApp {
                     .append("account_holder", "Mai Kalange")
                     .append("account_type", "savings")
                     .append("balance", 2340)
-                    .append("last_updated", new Date());;
+                    .append("last_updated", new Date());
             //CRUD
             Crud crud = new Crud(client);
             //INSERT ONE

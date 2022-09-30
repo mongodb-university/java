@@ -16,6 +16,7 @@ import org.bson.types.ObjectId;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.mongodb.client.model.Aggregates.match;
@@ -37,7 +38,8 @@ public class DemoApp {
                     .append("account_id", "MDB255054629")
                     .append("account_holder", "Mai Kalange")
                     .append("account_type", "savings")
-                    .append("balance", 2340);
+                    .append("balance", 2340)
+                    .append("last_updated", new Date());
             //CRUD
             Crud crud = new Crud(client);
             //INSERT ONE
