@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.InsertManyResult;
 import org.bson.Document;
 import org.bson.BsonValue;
 import org.bson.conversions.Bson;
