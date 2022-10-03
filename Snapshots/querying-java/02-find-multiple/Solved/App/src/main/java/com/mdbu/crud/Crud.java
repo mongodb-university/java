@@ -9,7 +9,6 @@ import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
 import org.bson.BsonValue;
 import org.bson.conversions.Bson;
-import java.util.Iterator;
 
 import java.util.ArrayList;
 import java.util.List;
