@@ -1,6 +1,7 @@
 package com.mdbu.crud;
 
 import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
