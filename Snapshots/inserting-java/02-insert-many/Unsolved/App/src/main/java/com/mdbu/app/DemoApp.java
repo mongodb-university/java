@@ -34,14 +34,16 @@ public class DemoApp {
         root.setLevel(Level.WARN);
 
         try (MongoClient client = MongoClientSingleton.getClient()) {
-            Document account1 = new Document().append("account_holder", "John Doe").append("account_id", "MDB99115881").append("balance", 1785).append("account_type", "checking");
-            Document account2 = new Document().append("account_holder", "Jane Doe").append("account_id", "MDB79101843").append("balance", 1500).append("account_type", "checking");
-            Document account3 = new Document().append("account_holder", "Mary Doe").append("account_id", "MDB63191563").append("balance", 1500).append("account_type", "checking");
+            Document account1 = new Document().append("account_holder", "John Doe").append("account_id", "MDB99115881").append("balance", 1785).append("account_type", "checking").append("last_updated", new Date());
+            Document account2 = new Document().append("account_holder", "Jane Doe").append("account_id", "MDB79101843").append("balance", 1500).append("account_type", "checking").append("last_updated", new Date());
+            Document account3 = new Document().append("account_holder", "Mary Doe").append("account_id", "MDB63191563").append("balance", 1500).append("account_type", "checking").append("last_updated", new Date());
 
             List<Document> sampleDocuments = new ArrayList<>();
             sampleDocuments.add(account1);
             sampleDocuments.add(account2);
             sampleDocuments.add(account3);
+            //CRUD
+            Crud crud = new Crud(client);
             //INSERT MANY
             crud.insertManyDocuments(sampleDocuments);
         }
