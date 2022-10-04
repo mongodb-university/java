@@ -36,7 +36,7 @@ public class DemoApp {
             //CRUD
             Crud crud = new Crud(client);
             //DELETE MANY
-            Bson documentsToDelete = eq("balance", 1500);
+            Bson documentsToDelete = lt("balance", 500);
             crud.deleteManyDocuments(documentsToDelete);
         }
     }
