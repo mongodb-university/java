@@ -16,23 +16,5 @@ import static com.mongodb.client.model.Updates.inc;
 import static com.mongodb.client.model.Updates.push;
 
 public class Transaction {
-    private final MongoClient client;
 
-    public Transaction(MongoClient client) {
-        this.client = client;
-    }
-
-    public void transferMoney(String accountIdOfSender, double transactionAmount, String accountIdOfReceiver) {
-        try (ClientSession session = client.startSession()) {
-            UUID transferId = UUID.randomUUID();
-            try {
-                session.withTransaction(() -> {
-                    //TODO: Add transaction code here
-                    return null;
-                });
-            } catch (RuntimeException e) {
-                // some error handling
-            }
-        }
-    }
 }
