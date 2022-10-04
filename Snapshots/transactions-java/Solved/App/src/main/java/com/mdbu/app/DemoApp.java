@@ -35,8 +35,8 @@ public class DemoApp {
         try (MongoClient client = MongoClientSingleton.getClient()) {
             //Transaction
             Transaction txn = new Transaction(client);
-            var senderAccountFilter = "";
-            var receiverAccountFilter = "";
+            var senderAccountFilter = "MDB310054629";
+            var receiverAccountFilter = "MDB643731035";
             double transferAmount = 200;
             txn.transferMoney(senderAccountFilter, transferAmount, receiverAccountFilter);
         }
