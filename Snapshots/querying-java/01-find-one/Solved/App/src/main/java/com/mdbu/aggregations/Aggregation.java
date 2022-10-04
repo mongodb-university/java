@@ -18,29 +18,5 @@ import java.util.List;
 
 public class Aggregation {
 
-    private final MongoCollection<Document> collection;
-
-    public Aggregation(MongoClient client) {
-        this.collection = client.getDatabase("banking").getCollection("accounts");
-    }
-
-    public void showAccountTypeSummary() {
-        Bson matchStage = null; //TODO: define the match stage
-        Bson groupStage = null; //TODO: define the group stage
-        List<Bson> pipeline = List.of(matchStage, groupStage);
-        AggregateIterable<Document> result = collection.aggregate(pipeline);
-        result.forEach(document -> System.out.println(document.toJson()));
-    }
-
-    public void showGBPBalancesForCheckingAccounts() {
-        Bson matchStage = null; //TODO define the match balance & account stage
-        Bson sortStage = null; //TODO define the sort stage
-        Bson projectStage = null; //TODO: define the projection stage
-        var mspPipeline = asList(matchStage, sortStage, projectStage );
-        AggregateIterable<Document> result = collection.aggregate(mspPipeline);
-
-        System.out.println("Display aggregation results");
-        result.forEach(document -> System.out.println(document.toJson()));
-    }
 }
 
