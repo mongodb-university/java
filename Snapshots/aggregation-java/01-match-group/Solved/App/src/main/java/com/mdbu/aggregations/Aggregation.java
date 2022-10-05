@@ -17,6 +17,7 @@ import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.List;
+import java.util.Arrays;
 
 public class Aggregation {
 
