@@ -10,6 +10,7 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.util.UUID;
+import java.util.Date;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.inc;
@@ -24,7 +25,8 @@ public class Transaction {
 
     public void transferMoney(String accountIdOfSender, double transactionAmount, String accountIdOfReceiver) {
         try (ClientSession session = client.startSession()) {
-            UUID transferId = UUID.randomUUID();
+            UUID transfer = UUID.randomUUID();
+            String transferId = transfer.toString();
             try {
                 session.withTransaction(() -> {
                     //TODO: Add transaction code here
