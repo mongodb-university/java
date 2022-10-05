@@ -10,6 +10,7 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.util.UUID;
+import java.util.Date;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.inc;
@@ -24,7 +25,8 @@ public class Transaction {
 
     public void transferMoney(String accountIdOfSender, double transactionAmount, String accountIdOfReceiver) {
         try (ClientSession session = client.startSession()) {
-            UUID transferId = UUID.randomUUID();
+            UUID transfer = UUID.randomUUID();
+            String transferId = transfer.toString();
             try {
                 session.withTransaction(() -> {
                     MongoCollection<Document> accountsCollection = client.getDatabase("bank").getCollection("accounts");
@@ -37,9 +39,9 @@ public class Transaction {
                     Bson receiverAccountId = eq("account_id", accountIdOfReceiver);
                     Bson credit = Updates.combine(inc("balance", transactionAmount), push("transfers_complete", transferId));
     
-                    transfersCollection.insertOne(clientSession, new Document("_id", new ObjectId()).append("transfer_id", transferId).append("to_account", accountIdOfReceiver).append("from_account", accountIdOfSender).append("amount", transactionAmount));
-                    accountsCollection.updateOne(clientSession, senderAccountId, debit);
-                    accountsCollection.updateOne(clientSession, receiverAccountId, credit);
+                    transfersCollection.insertOne(session, new Document("_id", new ObjectId()).append("transfer_id", transferId).append("to_account", accountIdOfReceiver).append("from_account", accountIdOfSender).append("amount", transactionAmount));
+                    accountsCollection.updateOne(session, senderAccountFilter, debitUpdate);
+                    accountsCollection.updateOne(session, receiverAccountId, credit);
                     return null;
                 });
             } catch (RuntimeException e) {
