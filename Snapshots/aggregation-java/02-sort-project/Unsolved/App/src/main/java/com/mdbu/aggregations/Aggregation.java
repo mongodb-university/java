@@ -12,8 +12,8 @@ import com.mdbu.aggregations.Aggregation;
 import static com.mongodb.client.model.Sorts.orderBy;
 import static java.util.Arrays.asList;
 import static com.mongodb.client.model.Aggregates.*;
-import static com.mongodb.client.model.Accumulators.*;
 import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.List;
@@ -25,11 +25,12 @@ public class Aggregation {
         this.collection = client.getDatabase("banking").getCollection("accounts");
     }
 
-    public void showAccountTypeSummary(MongoCollection<Document> accounts) {
-        Bson matchStage = null; //TODO: define the match stage
-        Bson groupStage = null; //TODO: define the group stage
+    public void showGBPBalancesForCheckingAccounts(MongoCollection<Document> accounts) {
+        Bson matchStage = null; //TODO define the match balance & account stage
+        Bson sortStage = null; //TODO define the sort stage
+        Bson projectStage = null; //TODO: define the projection stage
         System.out.println("Display aggregation results");
-        accounts.aggregate(Arrays.asList(matchStage, groupStage)).forEach(document->System.out.print(document.toJson()));
+        accounts.aggregate(asList(matchStage,sortStage, projectStage)).forEach(document -> System.out.print(document.toJson()));
     }
     
 }

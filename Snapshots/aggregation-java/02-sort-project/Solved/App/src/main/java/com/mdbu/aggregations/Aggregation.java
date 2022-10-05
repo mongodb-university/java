@@ -12,19 +12,20 @@ import com.mdbu.aggregations.Aggregation;
 import static com.mongodb.client.model.Sorts.orderBy;
 import static java.util.Arrays.asList;
 import static com.mongodb.client.model.Aggregates.*;
-import static com.mongodb.client.model.Accumulators.*;
 import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.List;
 
 public class Aggregation {
 
-    public void showAccountTypeSummary(MongoCollection<Document> accounts) {
-        Bson matchStage = Aggregates.match(lt("balance",1000));
-        Bson groupStage = Aggregates.group("$account_type",sum("total_balance", "$balance"),avg("average_balance", "$balance"));
+    public void showGBPBalancesForCheckingAccounts(MongoCollection<Document> accounts) {
+        Bson matchStage = Aggregates.match(and(eq("account_type", "checking"), gt("balance", 1500)));
+        Bson sortStage = Aggregates.sort(orderBy(descending("balance")));
+        Bson projectStage = Aggregates.project(fields(include("account_id", "account_type", "balance"), excludeId()));
         System.out.println("Display aggregation results");
-        accounts.aggregate(Arrays.asList(matchStage, groupStage)).forEach(document->System.out.print(document.toJson()));
+        accounts.aggregate(asList(matchStage,sortStage, projectStage)).forEach(document -> System.out.print(document.toJson()));
     }
 
 }
