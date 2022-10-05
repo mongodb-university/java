@@ -26,9 +26,8 @@ public class Aggregation {
     public void showAccountTypeSummary() {
         Bson matchStage = null; //TODO: define the match stage
         Bson groupStage = null; //TODO: define the group stage
-        List<Bson> pipeline = List.of(matchStage, groupStage);
-        AggregateIterable<Document> result = collection.aggregate(pipeline);
-        result.forEach(document -> System.out.println(document.toJson()));
+        System.out.println("Display aggregation results");
+        accounts.aggregate(Arrays.asList(matchStage, groupStage)).forEach(document->System.out.print(document.toJson()));
     }
     
 }

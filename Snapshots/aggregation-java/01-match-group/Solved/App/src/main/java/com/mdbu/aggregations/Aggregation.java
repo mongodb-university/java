@@ -18,13 +18,12 @@ import java.util.List;
 
 public class Aggregation {
 
-    public void showAccountTypeSummary() {
+    public void showAccountTypeSummary(MongoCollection<Document> accounts) {
         Bson matchStage = Aggregates.match(lt("balance",1000));
         Bson groupStage = Aggregates.group("$account_type",sum("total_balance", "$balance"),avg("average_balance", "$balance"));
-        List<Bson> pipeline = List.of(matchStage, groupStage);
-        AggregateIterable<Document> result = collection.aggregate(pipeline);
-        result.forEach(document -> System.out.println(document.toJson()));
+        System.out.println("Display aggregation results");
+        accounts.aggregate(Arrays.asList(matchStage, groupStage)).forEach(document->System.out.print(document.toJson()));
     }
-    
+
 }
 
