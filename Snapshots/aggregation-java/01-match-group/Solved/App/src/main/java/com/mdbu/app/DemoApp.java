@@ -33,10 +33,12 @@ public class DemoApp {
         root.setLevel(Level.WARN);
 
         try (MongoClient client = MongoClientSingleton.getClient()) {
+            MongoDatabase db = client.getDatabase("bank");
+            MongoCollection<Document> accounts = db.getCollection("accounts");
             //Aggregation
             Aggregation agg = new Aggregation(client);
 
-            agg.showAccountTypeSummary();
+            agg.showAccountTypeSummary(accounts);
         }
     }
 }
