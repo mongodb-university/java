@@ -33,7 +33,8 @@ public class DemoApp {
         // Available levels are: OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
         root.setLevel(Level.WARN);
 
-        try (MongoClient client = MongoClientSingleton.getClient()) {
+        String connectionString = System.getenv("MONGODB_URI");
+        try (MongoClient client = MongoClients.create(connectionString)) {
             Document account1 = new Document().append("account_holder", "John Doe").append("account_id", "MDB99115881").append("balance", 1785).append("account_type", "checking").append("last_updated", new Date());
             Document account2 = new Document().append("account_holder", "Jane Doe").append("account_id", "MDB79101843").append("balance", 1500).append("account_type", "checking").append("last_updated", new Date());
             Document account3 = new Document().append("account_holder", "Mary Doe").append("account_id", "MDB63191563").append("balance", 1500).append("account_type", "checking").append("last_updated", new Date());
