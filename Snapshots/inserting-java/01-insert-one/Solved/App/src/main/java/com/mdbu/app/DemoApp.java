@@ -6,7 +6,7 @@ import com.mdbu.aggregations.Aggregation;
 import com.mdbu.crud.Crud;
 import com.mdbu.transactions.Transaction;
 import com.mdbu.utils.MongoClientSingleton;
-import com.mongodb.client.*;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
@@ -32,8 +32,7 @@ public class DemoApp {
         // Available levels are: OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
         root.setLevel(Level.WARN);
 
-        String connectionString = System.getenv("MONGODB_URI");
-        try (MongoClient client = MongoClients.create(connectionString)) {
+        try (MongoClient client = MongoClientSingleton.getClient()) {
             Document sampleDocument = new Document("_id", new ObjectId())
                     .append("account_id", "MDB255054629")
                     .append("account_holder", "Mai Kalange")
