@@ -6,7 +6,7 @@ import com.mdbu.aggregations.Aggregation;
 import com.mdbu.crud.Crud;
 import com.mdbu.transactions.Transaction;
 import com.mdbu.utils.MongoClientSingleton;
-import com.mongodb.client.MongoClient;
+import com.mongodb.client.*;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
