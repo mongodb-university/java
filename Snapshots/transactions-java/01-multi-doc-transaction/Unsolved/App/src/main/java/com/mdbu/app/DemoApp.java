@@ -33,7 +33,8 @@ public class DemoApp {
         // Available levels are: OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
         root.setLevel(Level.WARN);
 
-        try (MongoClient client = MongoClientSingleton.getClient()) {
+        String connectionString = System.getenv("MONGODB_URI");
+        try (MongoClient client = MongoClients.create(connectionString)) {
             //Transaction
             Transaction txn = new Transaction(client);
             var senderAccountFilter = "";
