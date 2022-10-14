@@ -5,8 +5,7 @@ import ch.qos.logback.classic.Logger;
 import com.mdbu.aggregations.Aggregation;
 import com.mdbu.crud.Crud;
 import com.mdbu.transactions.Transaction;
-import com.mdbu.utils.MongoClientSingleton;
-import com.mongodb.client.MongoClient;
+import com.mongodb.client.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Aggregates;
@@ -34,7 +33,8 @@ public class DemoApp {
         // Available levels are: OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
         root.setLevel(Level.WARN);
 
-        try (MongoClient client = MongoClientSingleton.getClient()) {
+        String connectionString = System.getenv("MONGODB_URI");
+        try (MongoClient client = MongoClients.create(connectionString)) {
             MongoDatabase db = client.getDatabase("bank");
             MongoCollection<Document> accounts = db.getCollection("accounts");
             //Aggregation
