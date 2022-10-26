@@ -22,7 +22,7 @@ public class Aggregation {
     private final MongoCollection<Document> collection;
 
     public Aggregation(MongoClient client) {
-        this.collection = client.getDatabase("banking").getCollection("accounts");
+        this.collection = client.getDatabase("bank").getCollection("accounts");
     }
 
     public void showGBPBalancesForCheckingAccounts(MongoCollection<Document> accounts) {
